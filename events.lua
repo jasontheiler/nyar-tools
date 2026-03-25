@@ -39,6 +39,19 @@ function addon.events.LFG_ROLE_CHECK_SHOW()
   addon:Log("Automatically accepted LFG role check.")
 end
 
+function addon.events.MERCHANT_SHOW()
+  if not NyarToolsSettings.autoRepairAllItems then
+    return
+  end
+
+  if not CanMerchantRepair() then
+    return
+  end
+
+  RepairAllItems()
+  addon:Log("Automatically repaired all items.")
+end
+
 addon.frame:SetScript("OnEvent", function(_, name, ...)
   addon.events[name](...)
 end)

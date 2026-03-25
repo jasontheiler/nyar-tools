@@ -4,6 +4,7 @@ addon.settings = {
   defaults = {
     autoCombatLogging = true,
     autoLFGRoleCheckAccept = true,
+    autoRepairAllItems = true,
   }
 }
 
@@ -48,6 +49,23 @@ function addon.settings:Init()
       self.defaults.autoLFGRoleCheckAccept
     )
     Settings.CreateCheckbox(self.category, setting, "Accept LFG role checks automatically.")
+  end
+
+  do
+    local setting = Settings.RegisterAddOnSetting(
+      self.category,
+      addonName .. "_AutoRepairAllItems",
+      "autoRepairAllItems",
+      NyarToolsSettings,
+      type(NyarToolsSettings.autoRepairAllItems),
+      "Auto Repair all Items",
+      self.defaults.autoRepairAllItems
+    )
+    Settings.CreateCheckbox(
+      self.category,
+      setting,
+      "Repair all items automatically when you interact with a merchant."
+    )
   end
 
   Settings.RegisterAddOnCategory(self.category)
