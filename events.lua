@@ -48,8 +48,13 @@ function addon.events.MERCHANT_SHOW()
     return
   end
 
+  local cost = GetRepairAllCost()
+  if cost <= 0 then
+    return
+  end
+
   RepairAllItems()
-  addon:Log("Automatically repaired all items.")
+  addon:Log("Automatically repaired all items for", GetCoinTextureString(cost))
 end
 
 addon.frame:SetScript("OnEvent", function(_, name, ...)
