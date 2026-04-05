@@ -5,6 +5,7 @@ addon.settings = {
     autoCombatLogging = true,
     autoLFGRoleCheckAccept = true,
     autoRepairAllItems = true,
+    autoSkipCinematicsInDungeonsAndRaids = true,
   }
 }
 
@@ -34,7 +35,7 @@ function addon.settings:Init()
     Settings.CreateCheckbox(
       self.category,
       setting,
-      "Enables combat logging when you enter an instance and disables it when you leave it."
+      "Enable combat logging automatically when you enter an instance."
     )
   end
 
@@ -65,6 +66,23 @@ function addon.settings:Init()
       self.category,
       setting,
       "Repair all items automatically when you interact with a merchant."
+    )
+  end
+
+  do
+    local setting = Settings.RegisterAddOnSetting(
+      self.category,
+      addonName .. "_AutoSkipCinematicsInDungeonsAndRaids",
+      "autoSkipCinematicsInDungeonsAndRaids",
+      NyarToolsSettings,
+      type(NyarToolsSettings.autoSkipCinematicsInDungeonsAndRaids),
+      "Auto Skip Cinematics in Dungeons and Raids",
+      self.defaults.autoSkipCinematicsInDungeonsAndRaids
+    )
+    Settings.CreateCheckbox(
+      self.category,
+      setting,
+      "Skip cinematics automatically in dungeons and raids."
     )
   end
 

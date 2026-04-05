@@ -63,3 +63,28 @@ end)
 for name in pairs(addon.events) do
   addon.frame:RegisterEvent(name)
 end
+
+local function isInDungeonOrRaid()
+  local _, type = IsInInstance()
+  return type == "party" or type == "raid"
+end
+
+CinematicFrame:HookScript("OnShow", function()
+  if not NyarToolsSettings.autoSkipCinematicsInDungeonsAndRaids or not isInDungeonOrRaid() then
+    return
+  end
+
+  CinematicFrame_CancelCinematic()
+  addon:Log("Automatically skipped cinematic.")
+end)
+
+local playMovieOrig = MovieFrame_PlayMovie
+MovieFrame_PlayMovie = function(...)
+  if not NyarToolsSettings.autoSkipCinematicsInDungeonsAndRaids or not isInDungeonOrRaid() then
+    playMovieOrig(...)
+    return
+  end
+
+  GameMovieFinished()
+  addon:Log("Automatically skipped cinematic.")
+end
