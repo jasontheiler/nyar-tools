@@ -2,7 +2,7 @@
 ## Title: NyarTools
 ## Notes: Nyarlocc's tool collection
 ## Author: Nyarlocc
-## Version: 0.2.0
+## Version: 0.3.0
 ## IconTexture: interface/icons/inv_engineering_815_uberspanner
 ## SavedVariables: NyarToolsSettings
 
