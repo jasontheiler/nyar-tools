@@ -57,6 +57,24 @@ function addon.events.MERCHANT_SHOW()
   addon:Log("Automatically repaired all items for", GetCoinTextureString(cost))
 end
 
+function addon.events.CHALLENGE_MODE_KEYSTONE_RECEPTABLE_OPEN()
+  if not NyarToolsSettings.autoInsertMythicPlusKeystone then
+    return
+  end
+
+  for bag = 0, NUM_BAG_FRAMES do
+    for slot = 1, C_Container.GetContainerNumSlots(bag) do
+      local itemID = C_Container.GetContainerItemID(bag, slot)
+      if itemID then
+        local class, subClass = select(12, GetItemInfo(itemID))
+        if class == Enum.ItemClass.Reagent and subClass == Enum.ItemReagentSubclass.Keystone then
+          C_Container.UseContainerItem(bag, slot)
+        end
+      end
+    end
+  end
+end
+
 addon.frame:SetScript("OnEvent", function(_, name, ...)
   addon.events[name](...)
 end)

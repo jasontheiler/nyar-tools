@@ -6,6 +6,7 @@ addon.settings = {
     autoLFGRoleCheckAccept = true,
     autoRepairAllItems = true,
     autoSkipCinematicsInDungeonsAndRaids = true,
+    autoInsertMythicPlusKeystone = true,
   }
 }
 
@@ -83,6 +84,23 @@ function addon.settings:Init()
       self.category,
       setting,
       "Skip cinematics automatically in dungeons and raids."
+    )
+  end
+
+  do
+    local setting = Settings.RegisterAddOnSetting(
+      self.category,
+      addonName .. "_AutoInsertMythicPlusKeystone",
+      "autoInsertMythicPlusKeystone",
+      NyarToolsSettings,
+      type(NyarToolsSettings.autoInsertMythicPlusKeystone),
+      "Auto Insert Mythic+ Keystone",
+      self.defaults.autoInsertMythicPlusKeystone
+    )
+    Settings.CreateCheckbox(
+      self.category,
+      setting,
+      "Insert Mythic+ keystone automatically when you interact with a Font of Power."
     )
   end
 
